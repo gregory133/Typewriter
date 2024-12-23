@@ -1,0 +1,16 @@
+{
+    "write_hint": "Write your text here",
+    "write_no_selected_hint": "Click on \"Create\" to write a new note!",
+    "title": "Title",
+    "search": "Search",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "copy": "Copy All",
+    "tutorial": "How To Use", 
+    "language": "Choose Language",
+    "logout": "Log Out",
+    "login": "Login",
+    "login_text": "Log in to save your notes!",
+    "text_copied": "Text Copied!"
+}

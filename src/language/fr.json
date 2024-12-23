@@ -1,0 +1,17 @@
+{
+    "write_hint": "Rédigez vos notes ici",
+    "write_no_selected_hint": "Cliquez sur \"Créer\" pour rédiger une nouvelle note!",
+    "title": "Titre",
+    "search": "Recherche",
+    "create": "Créer",
+    "save": "Savegarder",
+    "delete": "Supprimer",
+    "copy": "Copier Tout",
+    "tutorial": "Comment Utiliser", 
+    "language": "Choisir la Langue",
+    "logout": "Déconnecter",
+    "login": "Connexion",
+    "login_text": "Connecte-toi pour sauvegrader tes notes!",
+    "text_copied": "Notes Copiées!"  
+    
+}
