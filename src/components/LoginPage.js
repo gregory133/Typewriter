@@ -11,46 +11,68 @@ import AuthContext from '../contexts/AuthContext'
 import {useNavigate} from 'react-router-dom'
 import Button from './Button';
 
-import {signInWithPopup, getAuth, signInWithRedirect, GoogleAuthProvider} from 'firebase/auth'
+import {signInWithPopup, getAuth, signInWithRedirect, GoogleAuthProvider,
+    GithubAuthProvider 
+} from 'firebase/auth'
 import MyToastContainer from './MyToastContainer'
 import LanguageContext from '../contexts/LanguageContext';
 
 export default function LoginPage() {
 
-    const provider = new GoogleAuthProvider();
+    const providerGoogle = new GoogleAuthProvider();
+    const providerGithub = new GithubAuthProvider();
     const auth = getAuth();
     // const {auth, providers}=useContext(AuthContext)
     const {transcript, setLanguage}=useContext(LanguageContext)
-    
-    
+
     const navigate=useNavigate()
 
-    // useEffect(()=>{
+    /**
+    Returns a promise that resolves into the result object of the sign in
+     */
+    function signIn(provider){
+        return new Promise((resolve, reject)=>{
+            signInWithPopup(auth, provider)
+            .then((result)=>{
+                console.log(result)
+                resolve(result)
+            })
+            .catch(err=>{
+                reject(err)
+            })
+        })  
+    }
 
-	// 	getRedirectResult(auth)
-    //     .then(result=>{
-    //         console.log(result)
-    //         if (result!=null){
-    //             navigate('/write')
-    //         }
-    //     })
-	// }, [])
+    /**
+     * 
+     * Given the credentials of the user, redirect them to
+     * the write page loggged in
+     */
+    function redirectWithCredential(credential, result){
+        const token = credential.token
+        const user = result.user
+        navigate('/write')
+    }
 
-    const signInGoogle=()=>{
-        // console.log(providers['google']);
-		signInWithPopup(auth, provider)
-        .then((result)=>{
+    function signInGoogle(){
+        signIn(providerGoogle)
+        .then(result=>{
             if (result != null){
                 const credential = GoogleAuthProvider.credentialFromResult(result)
-                const token = credential.token
-                const user = result.user
-                navigate('/write')
+                redirectWithCredential(credential, result)
             }
         })
-        .catch(err=>{
-            console.log(err)
-        })
 	}
+
+    function signInGithub(){
+        signIn(providerGithub)
+        .then(result=>{
+            if (result != null){
+                const credential = GithubAuthProvider.credentialFromResult(result)
+                redirectWithCredential(credential, result)
+            }
+        })
+    }
     
     return (
         <div className='flex flex-col h-screen'>
@@ -65,12 +87,16 @@ export default function LoginPage() {
                     <p className='flex flex-col items-center m-4 text-xl'>{transcript.login_text}</p>
                     {/* <img className='p-4 w-64 h-64' src='http://localhost:3000/assets/vectors/text.svg'/> */}
                     <div className='flex flex-col items-center'>
-                        <LoginButton text='Sign in with Google' src={process.env.PUBLIC_URL+'/assets/vectors/google.svg'}
+                        <LoginButton text='Sign in with Google' 
+                        src={process.env.PUBLIC_URL+'/assets/vectors/google.svg'}
                         onClick={signInGoogle}
                         />
-                        <LoginButton onClick={()=>{toast('not implemented yet')}} text='Sign in with Github' src={process.env.PUBLIC_URL+'/assets/vectors/github.svg'}/>
-                        <LoginButton onClick={()=>{toast('not implemented yet')}} text='Sign in with Facebook' src={process.env.PUBLIC_URL+'/assets/vectors/facebook.svg'}/>
-                        <LoginButton onClick={()=>{toast('not implemented yet')}} text='Sign in with Twitter' src={process.env.PUBLIC_URL+'/assets/vectors/twitter.svg'}/>
+                        <LoginButton onClick={signInGithub} 
+                        text='Sign in with Github' src={process.env.PUBLIC_URL+'/assets/vectors/github.svg'}/>
+                        <LoginButton onClick={()=>{toast('not implemented yet')}} 
+                        text='Sign in with Facebook' src={process.env.PUBLIC_URL+'/assets/vectors/facebook.svg'}/>
+                        <LoginButton onClick={()=>{toast('not implemented yet')}} 
+                        text='Sign in with Twitter' src={process.env.PUBLIC_URL+'/assets/vectors/twitter.svg'}/>
 
                     </div>
                 </div>
