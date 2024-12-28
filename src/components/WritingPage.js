@@ -39,6 +39,8 @@ export default function WritingPage() {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen]=useState(false)
 
+    const iconLength = 50
+
     useEffect(()=>{
         onAuthStateChanged(auth, user=>{
             
@@ -214,14 +216,30 @@ export default function WritingPage() {
         <div>
             
             <Navbar imageButtons={[
-                // <ImageButton onClick={()=>{toast('not implemented yet')}} hoverText={transcript.language} src={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>,
-                <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, 
+               
+                <div className='flex items-center'>
+                    <div className=' font-medium
+                    text-white flex-row items-center justify-center'>Change Language</div>
+    
+                    <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, 
                     {text:'French', symbol:'fr'}]} 
-                    image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>,
-                <ImageButton onClick={()=>{toast('not implemented yet')}} hoverText={transcript.tutorial} 
-                src={process.env.PUBLIC_URL + '/assets/vectors/book.svg'}/>,
-                <ImageButton onClick={logout} hoverText={transcript.logout} src={process.env.PUBLIC_URL + 
-                    '/assets/vectors/door.svg'}/>
+                    image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>       
+                </div>,
+    
+                <div className='flex items-center h-full'>
+                    <div className='flex justify-center items-center text-white
+                    font-medium'>Logout</div>
+    
+                    <a onClick={logout}>
+                        <img style={{
+                            height: iconLength,
+                            width: iconLength
+                        }}
+                        className='m-8 object-contain items-center' 
+                        src={process.env.PUBLIC_URL+'/assets/vectors/door.svg'}/>
+                    </a>   
+                </div>
+                
             ]}/>
             
             <div className='flex justify-between'>

@@ -7,6 +7,8 @@ import LoginButton from './LoginButton'
 import AuthContext from '../contexts/AuthContext'
 import {useNavigate} from 'react-router-dom'
 import Button from './Button';
+import ImageButton from './ImageButton'
+import ImageDropDown from './ImageDropDown'
 
 import {signInWithPopup, getAuth, signInWithRedirect, GoogleAuthProvider,
     GithubAuthProvider, FacebookAuthProvider, TwitterAuthProvider 
@@ -22,6 +24,7 @@ export default function LoginPage() {
     const providerTwitter = new TwitterAuthProvider();
 
     const auth = getAuth();
+    const iconLength = 50
     // const {auth, providers}=useContext(AuthContext)
     const {transcript, setLanguage}=useContext(LanguageContext)
 
@@ -100,10 +103,35 @@ export default function LoginPage() {
     
     return (
         <div className='flex flex-col h-screen'>
-            <Navbar/>
+            <Navbar imageButtons={[
+                <div className='flex items-center'>
+                <div className=' font-medium
+                text-white flex-row items-center justify-center'>Change Language</div>
+
+                <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, 
+                {text:'French', symbol:'fr'}]} 
+                image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/> 
+      
+                  
+            </div>,
+
+            <div className='flex items-center h-full'>
+                <div className='flex justify-center items-center text-white
+                font-medium'>Repository</div>
+
+                <a target='_blank' href='https://github.com/gregory133/Typewriter'>
+                    <img style={{
+                        height: iconLength,
+                        width: iconLength
+                    }}
+                    className='m-8 object-contain' 
+                    src={process.env.PUBLIC_URL+'/assets/vectors/github-white.svg'}/>
+                </a>
+                
+            </div>
+            ]}/>
             <div className='flex grow'>
-                <div className='flex items-center flex-1 flex-col justify-center
-                '>
+                <div className='flex items-center flex-1 flex-col justify-center'>
                     <h1 className='flex flex-col items-center m-4 text-6xl font-bold'>{transcript.login}</h1>
                     <p className='flex flex-col items-center m-4 text-xl'>{transcript.login_text}</p>
               
