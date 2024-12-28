@@ -22,13 +22,16 @@ export default function ImageDropDown({image, options, hoverText}) {
         setDisplaying(!displaying)
         // event.stopPropagation()
     }
+
+    const iconLength = 60
     
     return (
         
-        <button ref={menuRef}  className=''>
-            <Tooltip arrow title={hoverText}>
-                <img onClick={onClick} src={image} className=' object-contain p-2 mx-8'/>
-            </Tooltip>
+        <button ref={menuRef}  className=' my-2'>
+            <img style={{
+                    width: iconLength, height: iconLength
+                }}
+                onClick={onClick} src={image} className=' object-contain p-2 mx-8'/>
             {
                 displaying
                 ?<ul className='absolute text-white shadow-md'>

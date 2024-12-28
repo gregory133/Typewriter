@@ -1,8 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
 import Navbar from './Navbar'
-import ImageButton from './ImageButton'
-import ImageDropDown from './ImageDropDown';
-
 
 import { toast } from 'react-toastify';
 import GoogleButton from 'react-google-button'
@@ -96,19 +93,20 @@ export default function LoginPage() {
             }
         })
     }
+
+    function onClickOtherProjects(){
+        window.location.href = 'https://github.com/gregory133';
+    }
     
     return (
         <div className='flex flex-col h-screen'>
-            <Navbar imageButtons={[
-                <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, {text:'French', symbol:'fr'}]} image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>,
-                <ImageButton hoverText='How To Use' src={process.env.PUBLIC_URL+'/assets/vectors/book.svg'}/>
-            ]}/>
+            <Navbar/>
             <div className='flex grow'>
                 <div className='flex items-center flex-1 flex-col justify-center
                 '>
                     <h1 className='flex flex-col items-center m-4 text-6xl font-bold'>{transcript.login}</h1>
                     <p className='flex flex-col items-center m-4 text-xl'>{transcript.login_text}</p>
-                    {/* <img className='p-4 w-64 h-64' src='http://localhost:3000/assets/vectors/text.svg'/> */}
+              
                     <div className='flex flex-col items-center'>
 
                         <LoginButton text='Sign in with Google' 
@@ -139,8 +137,8 @@ export default function LoginPage() {
 
 
                     <div className='flex flex-1 flex-row items-center justify-center'>
-                        <Button text='Learn More' color='blue'/>
-                        <Button text='My other projects' color='blue'/>
+                        {/* <Button text='Learn More' color='blue'/> */}
+                        <Button onClick={onClickOtherProjects} text='My other projects' color='blue'/>
                     </div>
                     
                    

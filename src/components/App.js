@@ -66,8 +66,6 @@ function App() {
 				</AuthContext.Provider>
 			</DBContext.Provider>
 		</LanguageContext.Provider>
-
-		// <ImageDropDown options={['English', 'French']} image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>
 	);
 }
 
