@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom'
 import Button from './Button';
 
 import {signInWithPopup, getAuth, signInWithRedirect, GoogleAuthProvider,
-    GithubAuthProvider 
+    GithubAuthProvider, FacebookAuthProvider, TwitterAuthProvider 
 } from 'firebase/auth'
 import MyToastContainer from './MyToastContainer'
 import LanguageContext from '../contexts/LanguageContext';
@@ -21,6 +21,9 @@ export default function LoginPage() {
 
     const providerGoogle = new GoogleAuthProvider();
     const providerGithub = new GithubAuthProvider();
+    const providerFacebook = new FacebookAuthProvider();
+    const providerTwitter = new TwitterAuthProvider();
+
     const auth = getAuth();
     // const {auth, providers}=useContext(AuthContext)
     const {transcript, setLanguage}=useContext(LanguageContext)
@@ -73,6 +76,26 @@ export default function LoginPage() {
             }
         })
     }
+
+    function signInFacebook(){
+        signIn(providerFacebook)
+        .then(result=>{
+            if (result != null){
+                const credential = FacebookAuthProvider.credentialFromResult(result)
+                redirectWithCredential(credential, result)
+            }
+        })
+    }
+
+    function signInTwitter(){
+        signIn(providerTwitter)
+        .then(result=>{
+            if (result != null){
+                const credential = TwitterAuthProvider.credentialFromResult(result)
+                redirectWithCredential(credential, result)
+            }
+        })
+    }
     
     return (
         <div className='flex flex-col h-screen'>
@@ -87,15 +110,19 @@ export default function LoginPage() {
                     <p className='flex flex-col items-center m-4 text-xl'>{transcript.login_text}</p>
                     {/* <img className='p-4 w-64 h-64' src='http://localhost:3000/assets/vectors/text.svg'/> */}
                     <div className='flex flex-col items-center'>
+
                         <LoginButton text='Sign in with Google' 
                         src={process.env.PUBLIC_URL+'/assets/vectors/google.svg'}
                         onClick={signInGoogle}
                         />
+
                         <LoginButton onClick={signInGithub} 
                         text='Sign in with Github' src={process.env.PUBLIC_URL+'/assets/vectors/github.svg'}/>
-                        <LoginButton onClick={()=>{toast('not implemented yet')}} 
+                        
+                        <LoginButton onClick={signInFacebook}                    
                         text='Sign in with Facebook' src={process.env.PUBLIC_URL+'/assets/vectors/facebook.svg'}/>
-                        <LoginButton onClick={()=>{toast('not implemented yet')}} 
+                        
+                        <LoginButton onClick={signInTwitter} 
                         text='Sign in with Twitter' src={process.env.PUBLIC_URL+'/assets/vectors/twitter.svg'}/>
 
                     </div>
