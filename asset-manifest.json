@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/typewriter/static/css/main.96b64fe0.css",
-    "main.js": "/typewriter/static/js/main.9d431335.js",
+    "main.js": "/typewriter/static/js/main.129254b4.js",
     "index.html": "/typewriter/index.html",
     "main.96b64fe0.css.map": "/typewriter/static/css/main.96b64fe0.css.map",
-    "main.9d431335.js.map": "/typewriter/static/js/main.9d431335.js.map"
+    "main.129254b4.js.map": "/typewriter/static/js/main.129254b4.js.map"
   },
   "entrypoints": [
     "static/css/main.96b64fe0.css",
-    "static/js/main.9d431335.js"
+    "static/js/main.129254b4.js"
   ]
 }
