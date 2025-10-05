@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "https://gregory133.github.io/Typewriter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
