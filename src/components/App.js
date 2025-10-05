@@ -49,9 +49,6 @@ function App() {
         })
     }
 
-	// useEffect(()=>{
-	// 	console.log('user:', user);
-	// }, [user])
 	return (
 		
 		<LanguageContext.Provider value={{transcript, setLanguage}}>
@@ -59,8 +56,8 @@ function App() {
 				<AuthContext.Provider value={{auth, providers}}>
 					<BrowserRouter>	
 						<Routes>
-							<Route path='/write' element={<WritingPage/>}/>
-							<Route path='/' element={<LoginPage/>}/>
+							{/* <Route path='/write' element={<WritingPage/>}/> */}
+							<Route path='/' element={<WritingPage/>}/>
 						</Routes>
 					</BrowserRouter>
 				</AuthContext.Provider>
