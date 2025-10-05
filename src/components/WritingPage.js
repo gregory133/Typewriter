@@ -209,10 +209,8 @@ export default function WritingPage() {
         }
     }
 
-    // console.log(transcript.language);
-
-
     return (
+
         <div>
             
             <Navbar imageButtons={[
@@ -226,17 +224,45 @@ export default function WritingPage() {
                     image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>       
                 </div>,
     
+                // <div className='flex items-center h-full'>
+                //     <div className='flex justify-center items-center text-white
+                //     font-medium'>Logout</div>
+    
+                //     <a onClick={logout}>
+                //         <img style={{
+                //             height: iconLength,
+                //             width: iconLength
+                //         }}
+                //         className='m-8 object-contain items-center' 
+                //         src={process.env.PUBLIC_URL+'/assets/vectors/door.svg'}/>
+                //     </a>   
+                // </div>,
+
                 <div className='flex items-center h-full'>
                     <div className='flex justify-center items-center text-white
-                    font-medium'>Logout</div>
+                    font-medium'>My Code</div>
     
-                    <a onClick={logout}>
+                    <a href='https://github.com/gregory133/Typewriter'>
                         <img style={{
                             height: iconLength,
                             width: iconLength
                         }}
                         className='m-8 object-contain items-center' 
-                        src={process.env.PUBLIC_URL+'/assets/vectors/door.svg'}/>
+                        src={process.env.PUBLIC_URL+'/assets/vectors/coding.png'}/>
+                    </a>   
+                </div>,
+
+                <div className='flex items-center h-full'>
+                    <div className='flex justify-center items-center text-white
+                    font-medium'>My Projects</div>
+    
+                    <a href='https://github.com/gregory133'>
+                        <img style={{
+                            height: iconLength,
+                            width: iconLength
+                        }}
+                        className='m-8 object-contain items-center' 
+                        src={process.env.PUBLIC_URL+'/assets/vectors/github-white.svg'}/>
                     </a>   
                 </div>
                 
