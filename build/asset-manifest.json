@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.96b64fe0.css",
-    "main.js": "/static/js/main.a0c05894.js",
-    "index.html": "/index.html",
-    "main.96b64fe0.css.map": "/static/css/main.96b64fe0.css.map",
-    "main.a0c05894.js.map": "/static/js/main.a0c05894.js.map"
+    "main.css": "/Typewriter/static/css/main.96b64fe0.css",
+    "main.js": "/Typewriter/static/js/main.6bbedcf0.js",
+    "index.html": "/Typewriter/index.html",
+    "main.96b64fe0.css.map": "/Typewriter/static/css/main.96b64fe0.css.map",
+    "main.6bbedcf0.js.map": "/Typewriter/static/js/main.6bbedcf0.js.map"
   },
   "entrypoints": [
     "static/css/main.96b64fe0.css",
-    "static/js/main.a0c05894.js"
+    "static/js/main.6bbedcf0.js"
   ]
 }
