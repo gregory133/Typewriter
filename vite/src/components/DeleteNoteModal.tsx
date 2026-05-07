@@ -2,7 +2,7 @@ import { Box, Modal } from '@mui/material'
 import Button from './Button';
 
 export default function DeleteNoteModal({isOpen, onRequestClose, onClickDelete}
-  :{isOpen: boolean; onRequestClose: () => void; onClickDelete: () => void; onC: () => void}) {
+  :{isOpen: boolean; onRequestClose: () => void; onClickDelete: () => void; }) {
 
   const style = {
     outline: 'none',

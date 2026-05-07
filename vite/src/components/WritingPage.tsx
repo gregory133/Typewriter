@@ -83,14 +83,14 @@ export default function WritingPage() {
         })
     }, [])
 
-    const addNoteToDatabase=(note)=>{
+    const addNoteToDatabase=(note:any)=>{
         console.log('added to db');
         updateDoc(doc(db, 'users', auth.currentUser.uid), {
             notes: arrayUnion(note)
         })
     }
 
-    const updateNoteInDatabase=(newNote:any=>{
+    const updateNoteInDatabase=((newNote:any)=>{
         console.log('update db');
         const uid=auth.currentUser.uid
         getDoc(doc(db, 'users', uid))
@@ -190,18 +190,31 @@ export default function WritingPage() {
     }
 
     const copy=()=>{
-        const contents=document.getElementById('contents').value
-        navigator.clipboard.writeText(contents)
-        toast(transcript.text_copied)
+
+        const contentsTextbox = document.getElementById('contents') as HTMLInputElement
+
+        if (contentsTextbox){
+            const contents=contentsTextbox.value
+            navigator.clipboard.writeText(contents)
+            toast(transcript.text_copied)
+        }
+        
     }
 
-    const onClickListItem=(note, setSelected)=>{
+    const onClickListItem=(note:any, setSelected:any)=>{
         // unselectAllListItems()
         saveNote()
         setCurrentNote(note)
         setSelected(true)
-        document.getElementById('title').value=note.title
-        document.getElementById('contents').value=note.contents
+
+        const titleTextbox = document.getElementById('title') as HTMLInputElement
+        const contentsTextbox = document.getElementById('contents') as HTMLInputElement
+        
+        if (titleTextbox && contentsTextbox){
+            titleTextbox.value = note.title
+            contentsTextbox.value = note.contents
+        }
+
     }
 
     const logout=()=>{
@@ -209,10 +222,17 @@ export default function WritingPage() {
     }
 
     const onSearchboxChanged=()=>{
-        const searchText=document.getElementById('search').value
-        const notesToDisplay=findAllMatches(notes, searchText)
-        setVisibleNotes(notesToDisplay)
+
+        const searchTextBox=document.getElementById('search') as HTMLInputElement
+
+        if (searchTextBox)
+        {
+            const searchText=searchTextBox.value
+            const notesToDisplay=findAllMatches(notes, searchText)
+            setVisibleNotes(notesToDisplay)
         
+        }
+
     }
     
     function onRequestCloseDeleteNoteModal(){
@@ -237,8 +257,7 @@ export default function WritingPage() {
                     text-white flex-row items-center justify-center'>Change Language</div>
     
                     <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, 
-                    {text:'French', symbol:'fr'}]} 
-                    image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/>       
+                    {text:'French', symbol:'fr'}]} image={`${import.meta.env.BASE_URL}/assets/vectors/language.svg`}/>  
                 </div>,
     
                 // <div className='flex items-center h-full'>
@@ -265,7 +284,8 @@ export default function WritingPage() {
                             width: iconLength
                         }}
                         className='m-8 object-contain items-center' 
-                        src={process.env.PUBLIC_URL+'/assets/vectors/coding.png'}/>
+                        src={`${import.meta.env.BASE_URL}/assets/vectors/coding.png`}/>
+                        
                     </a>   
                 </div>,
 
@@ -279,7 +299,7 @@ export default function WritingPage() {
                             width: iconLength
                         }}
                         className='m-8 object-contain items-center' 
-                        src={process.env.PUBLIC_URL+'/assets/vectors/github-white.svg'}/>
+                        src={`${import.meta.env.BASE_URL}/assets/vectors/github-white.svg`}/>
                     </a>   
                 </div>
                 

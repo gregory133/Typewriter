@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 import {processText} from '../library/processText.ts'
 
 export default function ContentTextbox({id, canHighlight, placeholder}: {id: string; canHighlight: boolean; placeholder: string}){
@@ -12,9 +12,12 @@ export default function ContentTextbox({id, canHighlight, placeholder}: {id: str
 	})
 
     const onChange=()=>{
-		const textbox=document.getElementById('contents')
+		const textbox=document.getElementById('contents') as HTMLInputElement
+
+		if (!textbox) return
+
 		const text=textbox.value
-		const cursorPos=textbox.selectionStart
+		const cursorPos:number=textbox.selectionStart!
 		console.log(cursorPos);
 
 		const newText=processText(text, cursorPos)

@@ -7,8 +7,8 @@ export default function Textbox({placeholder, canHighlight, border, onChange, id
 	const textboxRef=useRef<HTMLTextAreaElement>(null)
 
 	useEffect(()=>{
-		const textbox=document.getElementById(id)
-		if (id!='search'){
+		const textbox=document.getElementById(id) as HTMLInputElement
+		if (id!='search' && textbox){
 			textbox.readOnly=!canHighlight
 		}
 		

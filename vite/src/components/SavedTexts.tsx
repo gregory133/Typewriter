@@ -25,10 +25,10 @@ export default function SavedTexts() {
 				scrollbar-thumb-gray-400 scrollbar-track-gray-100`}>
 				
 				<Textbox setBorderColor={setBorderColor} id='search' placeholder='Search' 
-				border='border-0' onChange={onSearchboxChanged}/>	
+				border='border-0' onChange={onSearchboxChanged} canHighlight={false} />	
 
 				<img className='h-full p-2'
-				src={process.env.PUBLIC_URL+'/assets/vectors/search.svg'}
+				src={`${import.meta.env.BASE_URL}/assets/vectors/search.svg`}
 				style={{backgroundSize: 'contain', pointerEvents: 'none'}}/>
 			</div>
 
@@ -42,7 +42,7 @@ export default function SavedTexts() {
 						</span> 
 						to make a new note!
 					</p>
-					: visibleNotes.map(note=>{
+					: visibleNotes.map((note: any) => {
 						let bgColor='bg-gray-200'
 						if (note.dateCreated==currentNote?.dateCreated){
 							if (upToDate){

@@ -33,7 +33,7 @@ export default function LoginPage() {
     /**
     Returns a promise that resolves into the result object of the sign in
      */
-    function signIn(provider){
+    function signIn(provider: GoogleAuthProvider | GithubAuthProvider | FacebookAuthProvider | TwitterAuthProvider){
         return new Promise((resolve, reject)=>{
             signInWithPopup(auth, provider)
             .then((result)=>{
@@ -51,7 +51,7 @@ export default function LoginPage() {
      * Given the credentials of the user, redirect them to
      * the write page loggged in
      */
-    function redirectWithCredential(credential, result){
+    function redirectWithCredential(credential: any, result: any){
         const token = credential.token
         const user = result.user
         navigate('/write')
@@ -59,7 +59,7 @@ export default function LoginPage() {
 
     function signInGoogle(){
         signIn(providerGoogle)
-        .then(result=>{
+        .then((result:any)=>{
             if (result != null){
                 const credential = GoogleAuthProvider.credentialFromResult(result)
                 redirectWithCredential(credential, result)
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
     function signInGithub(){
         signIn(providerGithub)
-        .then(result=>{
+        .then((result:any)=>{
             if (result != null){
                 const credential = GithubAuthProvider.credentialFromResult(result)
                 redirectWithCredential(credential, result)
@@ -79,7 +79,7 @@ export default function LoginPage() {
 
     function signInFacebook(){
         signIn(providerFacebook)
-        .then(result=>{
+        .then((result:any)=>{
             if (result != null){
                 const credential = FacebookAuthProvider.credentialFromResult(result)
                 redirectWithCredential(credential, result)
@@ -89,7 +89,7 @@ export default function LoginPage() {
 
     function signInTwitter(){
         signIn(providerTwitter)
-        .then(result=>{
+        .then((result:any)=>{
             if (result != null){
                 const credential = TwitterAuthProvider.credentialFromResult(result)
                 redirectWithCredential(credential, result)
@@ -110,8 +110,7 @@ export default function LoginPage() {
 
                 <ImageDropDown hoverText='Language' options={[{text:'English', symbol:'en'}, 
                 {text:'French', symbol:'fr'}]} 
-                image={process.env.PUBLIC_URL+'/assets/vectors/language.svg'}/> 
-      
+                image={`${import.meta.env.BASE_URL}/assets/vectors/language.svg`}/> 
                   
             </div>,
 
@@ -125,7 +124,7 @@ export default function LoginPage() {
                         width: iconLength
                     }}
                     className='m-8 object-contain' 
-                    src={process.env.PUBLIC_URL+'/assets/vectors/github-white.svg'}/>
+                    src={`${import.meta.env.BASE_URL}/assets/vectors/github-white.svg`}/>
                 </a>
                 
             </div>
@@ -138,24 +137,24 @@ export default function LoginPage() {
                     <div className='flex flex-col items-center'>
 
                         <LoginButton text='Sign in with Google' 
-                        src={process.env.PUBLIC_URL+'/assets/vectors/google.svg'}
+                        src={`${import.meta.env.BASE_URL}/assets/vectors/google.svg`}
                         onClick={signInGoogle}
                         />
 
                         <LoginButton onClick={signInGithub} 
-                        text='Sign in with Github' src={process.env.PUBLIC_URL+'/assets/vectors/github.svg'}/>
+                        text='Sign in with Github' src={`${import.meta.env.BASE_URL}/assets/vectors/github.svg`}/>
                         
                         <LoginButton onClick={signInFacebook}                    
-                        text='Sign in with Facebook' src={process.env.PUBLIC_URL+'/assets/vectors/facebook.svg'}/>
+                        text='Sign in with Facebook' src={`${import.meta.env.BASE_URL}/assets/vectors/facebook.svg`}/>
                         
                         <LoginButton onClick={signInTwitter} 
-                        text='Sign in with Twitter' src={process.env.PUBLIC_URL+'/assets/vectors/twitter.svg'}/>
+                        text='Sign in with Twitter' src={`${import.meta.env.BASE_URL}/assets/vectors/twitter.svg`}/>
 
                     </div>
                 </div>
                 <div className='hidden md:flex flex-col items-center flex-1 bg-gradient-to-r to-cyan-300 from-blue-300'>
                     <img className='flex-1 m-4 w-1/4' 
-                    src={process.env.PUBLIC_URL+'/assets/vectors/text.svg'}/>
+                    src={`${import.meta.env.BASE_URL}/assets/vectors/text.svg`}/>
                     <h1 className=' font-bold text-5xl m-4' style={{fontFamily: 'Special Elite'}}>
                         Typewriter
                     </h1>
@@ -166,7 +165,7 @@ export default function LoginPage() {
 
                     <div className='flex flex-1 flex-row items-center justify-center'>
                         {/* <Button text='Learn More' color='blue'/> */}
-                        <Button onClick={onClickOtherProjects} text='My other projects' color='blue'/>
+                        <Button onClick={onClickOtherProjects} text='My other projects' color='blue' hoverText=''/>
                     </div>
                     
                    

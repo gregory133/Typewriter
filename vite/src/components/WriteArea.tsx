@@ -34,10 +34,17 @@ export default function WriteArea() {
         });
 	
     const copyAll=()=>{
-        const textbox=document.getElementById('textbox')
-        const text=textbox.value
-        navigator.clipboard.writeText(text)
-        notify()
+
+        const textbox=document.getElementById('textbox') as HTMLInputElement
+
+        if (textbox)
+        {
+            const text=textbox.value
+            navigator.clipboard.writeText(text)
+            notify()
+        }
+
+       
     }
 
     function onClickDeleteButton(){
@@ -61,8 +68,9 @@ export default function WriteArea() {
                     hoverText='Copy text to clipboard'/>
                 </div>	
                 
-                <Textbox canHighlight={currentNote!=null}  id='title' 
-                placeholder={transcript.title} border='border'/>
+                <Textbox placeholder={transcript.title} canHighlight={currentNote!=null}  id='title' 
+                setBorderColor={()=>{}} onChange={(_:any)=>{}}
+                border='border'/>
                 
             </div>
             
