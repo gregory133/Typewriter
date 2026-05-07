@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Modal{
+    height: 40%;
+    width: 40%;
+    background-color: rgb(249,250,251);
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgb(229,231,235);
+    background-position: center;
+    transform: translate(70%, 70%)
+}
