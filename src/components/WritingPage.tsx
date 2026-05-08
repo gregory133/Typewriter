@@ -247,7 +247,7 @@ export default function WritingPage() {
     }
 
 
-    console.log(`${import.meta.env.BASE_URL}assets/vectors/language.svg`)
+    // console.log(`${import.meta.env.BASE_URL}assets/vectors/language.svg`)
 
     return (
 
