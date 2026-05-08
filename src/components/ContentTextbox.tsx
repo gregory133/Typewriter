@@ -31,10 +31,10 @@ export default function ContentTextbox({id, canHighlight, placeholder}: {id: str
 	}
 
 	return (
-		<textarea ref={textboxRef} rows={20} className="block p-2.5 w-full
-		text-gray-900 bg-gray-50 rounded-lg border text-xl
-		focus:ring-blue-500 focus:border-blue-500 resize-none outline-none"
-		placeholder={placeholder} onChange={onChange}>
+		<textarea ref={textboxRef} rows={20} id={id} className="block p-2.5 w-full
+			text-gray-900 bg-gray-50 rounded-lg border text-xl 
+			focus:ring-blue-500 focus:border-blue-500 resize-none outline-none"
+			placeholder={placeholder} onChange={onChange}>
 
 		</textarea>
 	)

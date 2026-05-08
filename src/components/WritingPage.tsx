@@ -6,6 +6,7 @@ import MyToastContainer from './MyToastContainer'
 
 import ImageButton from './ImageButton';
 import AuthContext from '../contexts/AuthContext.ts';
+import LocalNotesContext from '../contexts/LocalNotesContext.ts';
 
 import { useNavigate } from 'react-router-dom';
 import {onAuthStateChanged } from 'firebase/auth'
@@ -23,7 +24,12 @@ import ImageDropDown from './ImageDropDown';
 import LanguageContext from '../contexts/LanguageContext.ts';
 import DeleteNoteModal from './DeleteNoteModal';
 
-
+interface Note
+{
+    title: string,
+    contents: string,
+    dateCreated: number
+}
 
 export default function WritingPage() {
 	const {db}=useContext(DBContext)
@@ -31,9 +37,9 @@ export default function WritingPage() {
 
     const navigate=useNavigate()
 
-    const [notes, setNotes]=useState<any[]>([])
+    const [notes, setNotes]=useState<Note[]>([])
     const [visibleNotes, setVisibleNotes]=useState(notes)
-    const [currentNote, setCurrentNote]=useState<any>(null)
+    const [currentNote, setCurrentNote]=useState<Note | null>(null)
     const [upToDate, setUpToDate]=useState(true)
     const {transcript, setLanguage}=useContext(LanguageContext)
 
@@ -84,14 +90,20 @@ export default function WritingPage() {
     }, [])
 
     const addNoteToDatabase=(note:any)=>{
-        console.log('added to db');
+
+        if (!auth.currentUser){
+            return
+        }
+  
         updateDoc(doc(db, 'users', auth.currentUser.uid), {
             notes: arrayUnion(note)
         })
+  
     }
 
     const updateNoteInDatabase=((newNote:any)=>{
-        console.log('update db');
+        console.log('update db');    
+
         const uid=auth.currentUser.uid
         getDoc(doc(db, 'users', uid))
         .then(document=>{
@@ -109,6 +121,7 @@ export default function WritingPage() {
     })
 
     const removeNoteFromDatabase=(note:any)=>{
+        
         console.log('removed from db');
         updateDoc(doc(db, 'users', auth.currentUser.uid), {
             notes: arrayRemove(note)
@@ -116,7 +129,7 @@ export default function WritingPage() {
     }
 
     const createNewNote=()=>{
-        let newNote={
+        let newNote:Note={
             title: '',
             contents: '',
             dateCreated: Date.now()
@@ -124,7 +137,10 @@ export default function WritingPage() {
         setNotes([...notes, newNote])
         setCurrentNote(newNote)
         setVisibleNotes([...visibleNotes, newNote])
-        addNoteToDatabase(newNote)   
+
+        if (auth.currentUser){
+            addNoteToDatabase(newNote)
+        }
 
     }
 
@@ -133,7 +149,7 @@ export default function WritingPage() {
     }
 
     const deleteNote=()=>{
-        // console.log(currentNote);
+
         if (currentNote!=null){
 
             const titleTextbox = document.getElementById('title') as HTMLInputElement
@@ -145,27 +161,28 @@ export default function WritingPage() {
             }
 
             let newNoteList=notes
-            // console.log('old', newNoteList);
             newNoteList.forEach((note, index, object) => {
                 if (note.dateCreated == currentNote.dateCreated) {
                     object.splice(index, 1);
                 }
             });
             setVisibleNotes(newNoteList)
-            removeNoteFromDatabase(currentNote)
+
+            if (auth.currentUser){
+                removeNoteFromDatabase(currentNote)
+            }
             setCurrentNote(null)
-            
-            // console.log('ere');
         }
         
     }
 
     const saveNote=()=>{
+        // console.log('save note');
         setUpToDate(true)
         if (currentNote!=null){
 
-            let title:string
-            let contents:string
+            let title:string = ''
+            let contents:string = ''
 
             const titleTextbox = document.getElementById('title') as HTMLInputElement
             const contentsTextbox = document.getElementById('contents') as HTMLInputElement
@@ -175,8 +192,15 @@ export default function WritingPage() {
                 contents=contentsTextbox.value
             }
 
+            console.log('title: ', title);
+            console.log('contents: ', contents);
+
             setCurrentNote(currentNote)
-            updateNoteInDatabase(currentNote)
+
+            if (auth.currentUser){
+                updateNoteInDatabase(currentNote)
+            }
+
             let newNoteList=notes
             newNoteList.forEach(note=>{
                 if (note.dateCreated==currentNote.dateCreated){
@@ -242,8 +266,9 @@ export default function WritingPage() {
     function onClickDeleteButton(){
         if (currentNote){
             deleteNote()
-            setIsDeleteModalOpen(false)
+            
         }
+        setIsDeleteModalOpen(false)
     }
 
 
@@ -323,7 +348,7 @@ export default function WritingPage() {
     
             <MyToastContainer/>
             <DeleteNoteModal onClickDelete={onClickDeleteButton}
-             onRequestClose={onRequestCloseDeleteNoteModal} isOpen={isDeleteModalOpen}/>
+            onRequestClose={onRequestCloseDeleteNoteModal} isOpen={isDeleteModalOpen}/>
         </div>
     )
 }

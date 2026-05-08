@@ -68,8 +68,8 @@ export default function WriteArea() {
                     hoverText='Copy text to clipboard'/>
                 </div>	
                 
-                <Textbox placeholder={transcript.title} canHighlight={currentNote!=null}  id='title' 
-                setBorderColor={()=>{}} onChange={(_:any)=>{}}
+                <Textbox placeholder={transcript.title} canHighlight={currentNote!=null}  
+                id='title' setBorderColor={()=>{}} onChange={(_:any)=>{}}
                 border='border'/>
                 
             </div>

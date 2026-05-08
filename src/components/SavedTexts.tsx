@@ -9,8 +9,12 @@ export default function SavedTexts() {
 	const {notes, setNotes, currentNote, setCurrentNote, onSearchboxChanged, visibleNotes
 	, upToDate}=useContext(NotesContext)
 
+	useEffect(()=>{
+		console.log(notes)
+	}, [notes])
 	
 	const [borderColor, setBorderColor]=useState('border-gray-300')
+
 	// useEffect(()=>{
 	// 	console.log(listItemElements);
 	// }, [listItemElements])
@@ -53,7 +57,6 @@ export default function SavedTexts() {
 							}
 							
 						}
-
 
 						return <ListItem bgColor={bgColor} note={note}/>
 					})
